@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
@@ -65,11 +63,11 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'BrowseArticles$_Query$_Article'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'title'),
                   isResolveType: false),
               ClassProperty(
@@ -139,6 +137,7 @@ class BrowseArticles$Query$Article extends JsonSerializable
 
   @override
   List<Object?> get props => [id, title, articleType];
+  @override
   Map<String, dynamic> toJson() => _$BrowseArticles$Query$ArticleToJson(this);
 }
 
@@ -153,6 +152,7 @@ class BrowseArticles$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [articles];
+  @override
   Map<String, dynamic> toJson() => _$BrowseArticles$QueryToJson(this);
 }
 
@@ -182,59 +182,60 @@ class BrowseArticlesArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$BrowseArticlesArgumentsToJson(this);
 }
 
+final BROWSE_ARTICLES_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'BrowseArticles'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'article_type_in')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'ArticleType'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'articles'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'article_type_in'),
+                  value: VariableNode(name: NameNode(value: 'article_type_in')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'title'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'article_type'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
 class BrowseArticlesQuery
     extends GraphQLQuery<BrowseArticles$Query, BrowseArticlesArguments> {
   BrowseArticlesQuery({required this.variables});
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'BrowseArticles'),
-        variableDefinitions: [
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'article_type_in')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'ArticleType'), isNonNull: true),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: [])
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'articles'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                    name: NameNode(value: 'article_type_in'),
-                    value:
-                        VariableNode(name: NameNode(value: 'article_type_in')))
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'title'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'article_type'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = BROWSE_ARTICLES_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'BrowseArticles';

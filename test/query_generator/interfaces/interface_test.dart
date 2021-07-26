@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -86,7 +84,6 @@ final LibraryDefinition libraryDefinition =
             isInput: false),
         ClassDefinition(
             name: ClassName(name: r'Custom$_Query$_Node$_ChatMessage$_User'),
-            extension: ClassName(name: r'Custom$_Query$_Node$_ChatMessage'),
             mixins: [FragmentName(name: r'UserFragMixin')],
             factoryPossibilities: {},
             typeNameField: ClassPropertyName(name: r'__typename'),
@@ -95,7 +92,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Query$_Node$_ChatMessage'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'message'),
                   isResolveType: false),
               ClassProperty(
@@ -113,7 +110,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Query$_Node'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
@@ -144,18 +141,18 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'UserFragMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'username'),
                   isResolveType: false)
             ])
       ],
       inputs: [
         QueryInput(
-            type: TypeName(name: r'String', isNonNull: true),
+            type: DartTypeName(name: r'String', isNonNull: true),
             name: QueryInputName(name: r'id'))
       ],
       generateHelpers: false,
@@ -185,11 +182,12 @@ class Custom$Query$Node$User extends Custom$Query$Node
 
   @override
   List<Object?> get props => [id, username];
+  @override
   Map<String, dynamic> toJson() => _$Custom$Query$Node$UserToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Custom$Query$Node$ChatMessage$User extends Custom$Query$Node$ChatMessage
+class Custom$Query$Node$ChatMessage$User extends JsonSerializable
     with EquatableMixin, UserFragMixin {
   Custom$Query$Node$ChatMessage$User();
 
@@ -199,6 +197,7 @@ class Custom$Query$Node$ChatMessage$User extends Custom$Query$Node$ChatMessage
 
   @override
   List<Object?> get props => [id, username];
+  @override
   Map<String, dynamic> toJson() =>
       _$Custom$Query$Node$ChatMessage$UserToJson(this);
 }
@@ -217,6 +216,7 @@ class Custom$Query$Node$ChatMessage extends Custom$Query$Node
 
   @override
   List<Object?> get props => [message, user];
+  @override
   Map<String, dynamic> toJson() => _$Custom$Query$Node$ChatMessageToJson(this);
 }
 
@@ -242,6 +242,7 @@ class Custom$Query$Node extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [id, $$typename];
+  @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
       case r'User':
@@ -265,6 +266,7 @@ class Custom$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [nodeById];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryToJson(this);
 }
 ''';

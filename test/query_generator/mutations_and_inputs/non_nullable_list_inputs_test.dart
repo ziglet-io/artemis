@@ -1,9 +1,4 @@
-// @dart = 2.8
-
-import 'package:artemis/builder.dart';
 import 'package:artemis/generator/data/data.dart';
-import 'package:build/build.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';
@@ -39,7 +34,7 @@ void main() {
                         name: ClassName(name: r'SomeQuery$_Query$_SomeObject'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r's'),
                               isResolveType: false)
                         ],
@@ -61,33 +56,37 @@ void main() {
                   ],
                   inputs: [
                     QueryInput(
-                        type: TypeName(name: r'int'),
+                        type: DartTypeName(name: r'int'),
                         name: QueryInputName(name: r'i')),
                     QueryInput(
-                        type: TypeName(name: r'int', isNonNull: true),
+                        type: DartTypeName(name: r'int', isNonNull: true),
                         name: QueryInputName(name: r'inn')),
                     QueryInput(
                         type: ListOfTypeName(
-                            typeName: TypeName(name: r'int'), isNonNull: false),
+                            typeName: DartTypeName(name: r'int'),
+                            isNonNull: false),
                         name: QueryInputName(name: r'li')),
                     QueryInput(
                         type: ListOfTypeName(
-                            typeName: TypeName(name: r'int', isNonNull: true),
+                            typeName:
+                                DartTypeName(name: r'int', isNonNull: true),
                             isNonNull: false),
                         name: QueryInputName(name: r'linn')),
                     QueryInput(
                         type: ListOfTypeName(
-                            typeName: TypeName(name: r'int'), isNonNull: true),
+                            typeName: DartTypeName(name: r'int'),
+                            isNonNull: true),
                         name: QueryInputName(name: r'lnni')),
                     QueryInput(
                         type: ListOfTypeName(
-                            typeName: TypeName(name: r'int', isNonNull: true),
+                            typeName:
+                                DartTypeName(name: r'int', isNonNull: true),
                             isNonNull: true),
                         name: QueryInputName(name: r'lnninn')),
                     QueryInput(
                         type: ListOfTypeName(
                             typeName: ListOfTypeName(
-                                typeName: TypeName(name: r'int'),
+                                typeName: DartTypeName(name: r'int'),
                                 isNonNull: false),
                             isNonNull: false),
                         name: QueryInputName(name: r'matrix')),
@@ -95,7 +94,7 @@ void main() {
                         type: ListOfTypeName(
                             typeName: ListOfTypeName(
                                 typeName:
-                                    TypeName(name: r'int', isNonNull: true),
+                                    DartTypeName(name: r'int', isNonNull: true),
                                 isNonNull: true),
                             isNonNull: true),
                         name: QueryInputName(name: r'matrixnn'))
@@ -123,6 +122,7 @@ class SomeQuery$Query$SomeObject extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [s];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$Query$SomeObjectToJson(this);
 }
 
@@ -137,6 +137,7 @@ class SomeQuery$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [someQuery];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$QueryToJson(this);
 }
 
@@ -178,122 +179,122 @@ class SomeQueryArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$SomeQueryArgumentsToJson(this);
 }
 
+final SOME_QUERY_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'some_query'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'i')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'inn')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'li')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'Int'), isNonNull: false),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'linn')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'Int'), isNonNull: true),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lnni')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'Int'), isNonNull: false),
+                isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'lnninn')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'Int'), isNonNull: true),
+                isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'matrix')),
+            type: ListTypeNode(
+                type: ListTypeNode(
+                    type: NamedTypeNode(
+                        name: NameNode(value: 'Int'), isNonNull: false),
+                    isNonNull: false),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'matrixnn')),
+            type: ListTypeNode(
+                type: ListTypeNode(
+                    type: NamedTypeNode(
+                        name: NameNode(value: 'Int'), isNonNull: true),
+                    isNonNull: true),
+                isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'someQuery'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'i'),
+                  value: VariableNode(name: NameNode(value: 'i'))),
+              ArgumentNode(
+                  name: NameNode(value: 'inn'),
+                  value: VariableNode(name: NameNode(value: 'inn'))),
+              ArgumentNode(
+                  name: NameNode(value: 'li'),
+                  value: VariableNode(name: NameNode(value: 'li'))),
+              ArgumentNode(
+                  name: NameNode(value: 'linn'),
+                  value: VariableNode(name: NameNode(value: 'linn'))),
+              ArgumentNode(
+                  name: NameNode(value: 'lnni'),
+                  value: VariableNode(name: NameNode(value: 'lnni'))),
+              ArgumentNode(
+                  name: NameNode(value: 'lnninn'),
+                  value: VariableNode(name: NameNode(value: 'lnninn'))),
+              ArgumentNode(
+                  name: NameNode(value: 'matrix'),
+                  value: VariableNode(name: NameNode(value: 'matrix'))),
+              ArgumentNode(
+                  name: NameNode(value: 'matrixnn'),
+                  value: VariableNode(name: NameNode(value: 'matrixnn')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 's'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
 class SomeQueryQuery extends GraphQLQuery<SomeQuery$Query, SomeQueryArguments> {
   SomeQueryQuery({required this.variables});
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'some_query'),
-        variableDefinitions: [
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'i')),
-              type:
-                  NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'inn')),
-              type:
-                  NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'li')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'Int'), isNonNull: false),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'linn')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'Int'), isNonNull: true),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'lnni')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'Int'), isNonNull: false),
-                  isNonNull: true),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'lnninn')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'Int'), isNonNull: true),
-                  isNonNull: true),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'matrix')),
-              type: ListTypeNode(
-                  type: ListTypeNode(
-                      type: NamedTypeNode(
-                          name: NameNode(value: 'Int'), isNonNull: false),
-                      isNonNull: false),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'matrixnn')),
-              type: ListTypeNode(
-                  type: ListTypeNode(
-                      type: NamedTypeNode(
-                          name: NameNode(value: 'Int'), isNonNull: true),
-                      isNonNull: true),
-                  isNonNull: true),
-              defaultValue: DefaultValueNode(value: null),
-              directives: [])
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'someQuery'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                    name: NameNode(value: 'i'),
-                    value: VariableNode(name: NameNode(value: 'i'))),
-                ArgumentNode(
-                    name: NameNode(value: 'inn'),
-                    value: VariableNode(name: NameNode(value: 'inn'))),
-                ArgumentNode(
-                    name: NameNode(value: 'li'),
-                    value: VariableNode(name: NameNode(value: 'li'))),
-                ArgumentNode(
-                    name: NameNode(value: 'linn'),
-                    value: VariableNode(name: NameNode(value: 'linn'))),
-                ArgumentNode(
-                    name: NameNode(value: 'lnni'),
-                    value: VariableNode(name: NameNode(value: 'lnni'))),
-                ArgumentNode(
-                    name: NameNode(value: 'lnninn'),
-                    value: VariableNode(name: NameNode(value: 'lnninn'))),
-                ArgumentNode(
-                    name: NameNode(value: 'matrix'),
-                    value: VariableNode(name: NameNode(value: 'matrix'))),
-                ArgumentNode(
-                    name: NameNode(value: 'matrixnn'),
-                    value: VariableNode(name: NameNode(value: 'matrixnn')))
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 's'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = SOME_QUERY_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'some_query';

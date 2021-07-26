@@ -1,22 +1,18 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
-import '../helpers.dart';
+import '../../helpers.dart';
 
 void main() {
-  group('On union types', () {
-    test(
-      'On union types',
-      () async => testGenerator(
-        query: query,
-        schema: graphQLSchema,
-        libraryDefinition: libraryDefinition,
-        generatedFile: generatedFile,
-      ),
-    );
-  });
+  test(
+    'On union types',
+    () async => testGenerator(
+      query: query,
+      schema: graphQLSchema,
+      libraryDefinition: libraryDefinition,
+      generatedFile: generatedFile,
+    ),
+  );
 }
 
 final String query = r'''
@@ -87,31 +83,31 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'SomeQuery$_SomeObject$_SomeUnion$_TypeA'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'int'),
+                  type: DartTypeName(name: r'int'),
                   name: ClassPropertyName(name: r'a'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_'),
                   annotations: [r'''JsonKey(name: '_')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_a'),
                   annotations: [r'''JsonKey(name: '_a')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_a_a'),
                   annotations: [r'''JsonKey(name: '_a_a')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_a_a_'),
                   annotations: [r'''JsonKey(name: '_a_a_')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_new'),
                   annotations: [r'''JsonKey(name: '_new')'''],
                   isResolveType: false),
@@ -129,36 +125,36 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'SomeQuery$_SomeObject$_SomeUnion$_TypeB'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'int'),
+                  type: DartTypeName(name: r'int'),
                   name: ClassPropertyName(name: r'b'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_'),
                   annotations: [r'''JsonKey(name: '_')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_b'),
                   annotations: [r'''JsonKey(name: '_b')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_b_b'),
                   annotations: [r'''JsonKey(name: '_b_b')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'_b_b_'),
                   annotations: [r'''JsonKey(name: '_b_b_')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'new'),
                   annotations: [r'''JsonKey(name: 'new')'''],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'IN'),
                   annotations: [r'''JsonKey(name: 'IN')'''],
                   isResolveType: false),
@@ -245,6 +241,7 @@ class SomeQuery$SomeObject$SomeUnion$TypeA
 
   @override
   List<Object?> get props => [a, $, $a, $aA, $aA_, $new, $$typename];
+  @override
   Map<String, dynamic> toJson() =>
       _$SomeQuery$SomeObject$SomeUnion$TypeAToJson(this);
 }
@@ -284,6 +281,7 @@ class SomeQuery$SomeObject$SomeUnion$TypeB
 
   @override
   List<Object?> get props => [b, $, $b, $bB, $bB_, kw$new, kw$IN, $$typename];
+  @override
   Map<String, dynamic> toJson() =>
       _$SomeQuery$SomeObject$SomeUnion$TypeBToJson(this);
 }
@@ -309,6 +307,7 @@ class SomeQuery$SomeObject$SomeUnion extends JsonSerializable
 
   @override
   List<Object?> get props => [$$typename];
+  @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
       case r'TypeA':
@@ -332,6 +331,7 @@ class SomeQuery$SomeObject extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [o];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$SomeObjectToJson(this);
 }
 ''';

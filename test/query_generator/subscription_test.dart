@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
@@ -96,11 +94,11 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'NewUserSub$_Subscription$_User'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'firstName'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'lastName'),
                   isResolveType: false),
               ClassProperty(
@@ -156,6 +154,7 @@ class NewUserSub$Subscription$User extends JsonSerializable
 
   @override
   List<Object?> get props => [firstName, lastName, userType];
+  @override
   Map<String, dynamic> toJson() => _$NewUserSub$Subscription$UserToJson(this);
 }
 
@@ -170,6 +169,7 @@ class NewUserSub$Subscription extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [newUser];
+  @override
   Map<String, dynamic> toJson() => _$NewUserSub$SubscriptionToJson(this);
 }
 

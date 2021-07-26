@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
@@ -158,6 +156,7 @@ class Custom$Query$Q extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [e];
+  @override
   Map<String, dynamic> toJson() => _$Custom$Query$QToJson(this);
 }
 
@@ -172,6 +171,7 @@ class Custom$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryToJson(this);
 }
 
@@ -187,6 +187,7 @@ class CustomList$Query$QList extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [e];
+  @override
   Map<String, dynamic> toJson() => _$CustomList$Query$QListToJson(this);
 }
 
@@ -201,6 +202,7 @@ class CustomList$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [qList];
+  @override
   Map<String, dynamic> toJson() => _$CustomList$QueryToJson(this);
 }
 

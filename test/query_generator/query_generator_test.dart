@@ -1,27 +1,10 @@
-// @dart = 2.8
-
-import 'package:artemis/builder.dart';
 import 'package:artemis/generator/data/data.dart';
-import 'package:build/build.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 import '../helpers.dart';
 
 void main() {
   group('On query generation', () {
-    test('When not configured, nothing will be generated', () async {
-      final anotherBuilder = graphQLQueryBuilder(BuilderOptions({}));
-
-      await testBuilder(
-        anotherBuilder,
-        {
-          'a|api.schema.graphql': '',
-          'a|some_query.query.graphql': 'query some_query { s, i }',
-        },
-      );
-    });
-
     test(
         'A simple query yields simple classes',
         () async => testGenerator(
@@ -46,11 +29,11 @@ void main() {
                         name: ClassName(name: r'SomeQuery$_SomeObject'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r's'),
                               isResolveType: false),
                           ClassProperty(
-                              type: TypeName(name: r'int'),
+                              type: DartTypeName(name: r'int'),
                               name: ClassPropertyName(name: r'i'),
                               isResolveType: false)
                         ],
@@ -82,6 +65,7 @@ class SomeQuery$SomeObject extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [s, i];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$SomeObjectToJson(this);
 }
 ''',
@@ -132,7 +116,7 @@ class SomeQuery$SomeObject extends JsonSerializable with EquatableMixin {
                                 r'SomeQuery$_Result$_SomeObject$_AnotherObject'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r'str'),
                               isResolveType: false)
                         ],
@@ -143,7 +127,7 @@ class SomeQuery$SomeObject extends JsonSerializable with EquatableMixin {
                         name: ClassName(name: r'SomeQuery$_Result$_SomeObject'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r'st'),
                               isResolveType: false),
                           ClassProperty(
@@ -162,7 +146,7 @@ class SomeQuery$SomeObject extends JsonSerializable with EquatableMixin {
                         name: ClassName(name: r'SomeQuery$_Result'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r's'),
                               isResolveType: false),
                           ClassProperty(
@@ -199,6 +183,7 @@ class SomeQuery$Result$SomeObject$AnotherObject extends JsonSerializable
 
   @override
   List<Object?> get props => [str];
+  @override
   Map<String, dynamic> toJson() =>
       _$SomeQuery$Result$SomeObject$AnotherObjectToJson(this);
 }
@@ -216,6 +201,7 @@ class SomeQuery$Result$SomeObject extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [st, ob];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$Result$SomeObjectToJson(this);
 }
 
@@ -232,6 +218,7 @@ class SomeQuery$Result extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [s, o];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$ResultToJson(this);
 }
 ''',

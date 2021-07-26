@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
@@ -63,11 +61,11 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'SearchArticles$_Query$_Article'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'title'),
                   isResolveType: false)
             ],
@@ -100,7 +98,7 @@ final LibraryDefinition libraryDefinition =
                   ],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'value'),
                   isResolveType: false)
             ],
@@ -139,6 +137,7 @@ class SearchArticles$Query$Article extends JsonSerializable
 
   @override
   List<Object?> get props => [id, title];
+  @override
   Map<String, dynamic> toJson() => _$SearchArticles$Query$ArticleToJson(this);
 }
 
@@ -153,6 +152,7 @@ class SearchArticles$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [articles];
+  @override
   Map<String, dynamic> toJson() => _$SearchArticles$QueryToJson(this);
 }
 
@@ -170,6 +170,7 @@ class ArticleTitleWhereConditions extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [kw$operator, value];
+  @override
   Map<String, dynamic> toJson() => _$ArticleTitleWhereConditionsToJson(this);
 }
 

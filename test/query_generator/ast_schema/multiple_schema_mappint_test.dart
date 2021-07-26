@@ -1,13 +1,9 @@
-// @dart = 2.8
-
 import 'package:artemis/builder.dart';
 import 'package:build/build.dart';
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:build_test/build_test.dart';
-import 'package:logging/logging.dart';
 import 'package:test/test.dart';
-import 'package:collection/collection.dart';
 
 void main() {
   group('Multiple schema mapping', () {
@@ -32,7 +28,7 @@ void main() {
           ],
         }));
 
-        int count = 0;
+        var count = 0;
         anotherBuilder.onBuild = expectAsync1((definition) {
           log.fine(definition);
           if (count == 0) {
@@ -161,11 +157,11 @@ final LibraryDefinition libraryDefinitionA =
             name: ClassName(name: r'BrowseArticles$_Query$_articles'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'title'),
                   isResolveType: false),
               ClassProperty(
@@ -226,11 +222,11 @@ final libraryDefinitionB =
             name: ClassName(name: r'BrowseRepositories$_Query$_repositories'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'title'),
                   isResolveType: false),
               ClassProperty(
@@ -277,7 +273,7 @@ final libraryDefinitionB =
                   ],
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'bool'),
+                  type: DartTypeName(name: r'bool'),
                   name: ClassPropertyName(name: r'enabled'),
                   isResolveType: false)
             ],
@@ -322,6 +318,7 @@ class BrowseArticles$Query$Articles extends JsonSerializable
 
   @override
   List<Object?> get props => [id, title, articleType];
+  @override
   Map<String, dynamic> toJson() => _$BrowseArticles$Query$ArticlesToJson(this);
 }
 
@@ -336,6 +333,7 @@ class BrowseArticles$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [articles];
+  @override
   Map<String, dynamic> toJson() => _$BrowseArticles$QueryToJson(this);
 }
 
@@ -347,46 +345,47 @@ enum ArticleType {
   @JsonValue('ARTEMIS_UNKNOWN')
   artemisUnknown,
 }
+final BROWSE_ARTICLES_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'BrowseArticles'),
+      variableDefinitions: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'articles'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'title'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'articleType'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
 
 class BrowseArticlesQuery
     extends GraphQLQuery<BrowseArticles$Query, JsonSerializable> {
   BrowseArticlesQuery();
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'BrowseArticles'),
-        variableDefinitions: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'articles'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'title'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'articleType'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = BROWSE_ARTICLES_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'BrowseArticles';
@@ -429,6 +428,7 @@ class BrowseRepositories$Query$Repositories extends JsonSerializable
 
   @override
   List<Object?> get props => [id, title, privacy, status];
+  @override
   Map<String, dynamic> toJson() =>
       _$BrowseRepositories$Query$RepositoriesToJson(this);
 }
@@ -444,6 +444,7 @@ class BrowseRepositories$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [repositories];
+  @override
   Map<String, dynamic> toJson() => _$BrowseRepositories$QueryToJson(this);
 }
 
@@ -461,6 +462,7 @@ class NotificationOptionInput extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [type, enabled];
+  @override
   Map<String, dynamic> toJson() => _$NotificationOptionInputToJson(this);
 }
 
@@ -509,67 +511,68 @@ class BrowseRepositoriesArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$BrowseRepositoriesArgumentsToJson(this);
 }
 
+final BROWSE_REPOSITORIES_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'BrowseRepositories'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'notificationTypes')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'NotificationOptionInput'),
+                    isNonNull: false),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'repositories'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'notificationTypes'),
+                  value:
+                      VariableNode(name: NameNode(value: 'notificationTypes')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'title'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'privacy'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'status'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
 class BrowseRepositoriesQuery extends GraphQLQuery<BrowseRepositories$Query,
     BrowseRepositoriesArguments> {
   BrowseRepositoriesQuery({required this.variables});
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'BrowseRepositories'),
-        variableDefinitions: [
-          VariableDefinitionNode(
-              variable:
-                  VariableNode(name: NameNode(value: 'notificationTypes')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'NotificationOptionInput'),
-                      isNonNull: false),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: [])
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'repositories'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                    name: NameNode(value: 'notificationTypes'),
-                    value: VariableNode(
-                        name: NameNode(value: 'notificationTypes')))
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'title'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'privacy'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null),
-                FieldNode(
-                    name: NameNode(value: 'status'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = BROWSE_REPOSITORIES_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'BrowseRepositories';

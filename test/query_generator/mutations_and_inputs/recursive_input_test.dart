@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -44,7 +42,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Mutation'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'mut'),
                   isResolveType: false)
             ],
@@ -95,6 +93,7 @@ class Custom$Mutation extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [mut];
+  @override
   Map<String, dynamic> toJson() => _$Custom$MutationToJson(this);
 }
 
@@ -110,6 +109,7 @@ class Input extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [and, or];
+  @override
   Map<String, dynamic> toJson() => _$InputToJson(this);
 }
 ''';

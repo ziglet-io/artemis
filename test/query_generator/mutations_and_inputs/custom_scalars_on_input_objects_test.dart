@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -28,6 +26,7 @@ void main() {
 
           input Input {
             id: MyUuid!
+            idNullabe: MyUuid
           }
           ''',
         libraryDefinition: libraryDefinition,
@@ -68,7 +67,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_MutationRoot$_MutationResponse'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r's'),
                   isResolveType: false)
             ],
@@ -91,10 +90,17 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Input'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'MyUuid', isNonNull: true),
+                  type: DartTypeName(name: r'MyUuid', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   annotations: [
                     r'JsonKey(fromJson: fromGraphQLMyUuidToDartMyUuid, toJson: fromDartMyUuidToGraphQLMyUuid)'
+                  ],
+                  isResolveType: false),
+              ClassProperty(
+                  type: DartTypeName(name: r'MyUuid'),
+                  name: ClassPropertyName(name: r'idNullabe'),
+                  annotations: [
+                    r'JsonKey(fromJson: fromGraphQLMyUuidNullableToDartMyUuidNullable, toJson: fromDartMyUuidNullableToGraphQLMyUuidNullable)'
                   ],
                   isResolveType: false)
             ],
@@ -107,17 +113,17 @@ final LibraryDefinition libraryDefinition =
             type: TypeName(name: r'Input', isNonNull: true),
             name: QueryInputName(name: r'input')),
         QueryInput(
-            type: TypeName(name: r'MyUuid'),
+            type: DartTypeName(name: r'MyUuid'),
             name: QueryInputName(name: r'previousId'),
             annotations: [
-              r'JsonKey(fromJson: fromGraphQLMyUuidToDartMyUuid, toJson: fromDartMyUuidToGraphQLMyUuid)'
+              r'JsonKey(fromJson: fromGraphQLMyUuidNullableToDartMyUuidNullable, toJson: fromDartMyUuidNullableToGraphQLMyUuidNullable)'
             ]),
         QueryInput(
             type: ListOfTypeName(
-                typeName: TypeName(name: r'MyUuid'), isNonNull: false),
+                typeName: DartTypeName(name: r'MyUuid'), isNonNull: false),
             name: QueryInputName(name: r'listIds'),
             annotations: [
-              r'JsonKey(fromJson: fromGraphQLListMyUuidToDartListMyUuid, toJson: fromDartListMyUuidToGraphQLListMyUuid)'
+              r'JsonKey(fromJson: fromGraphQLListNullableMyUuidNullableToDartListNullableMyUuidNullable, toJson: fromDartListNullableMyUuidNullableToGraphQLListNullableMyUuidNullable)'
             ])
       ],
       generateHelpers: true,
@@ -151,6 +157,7 @@ class Custom$MutationRoot$MutationResponse extends JsonSerializable
 
   @override
   List<Object?> get props => [s];
+  @override
   Map<String, dynamic> toJson() =>
       _$Custom$MutationRoot$MutationResponseToJson(this);
 }
@@ -166,12 +173,13 @@ class Custom$MutationRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [mut];
+  @override
   Map<String, dynamic> toJson() => _$Custom$MutationRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
 class Input extends JsonSerializable with EquatableMixin {
-  Input({required this.id});
+  Input({required this.id, this.idNullabe});
 
   factory Input.fromJson(Map<String, dynamic> json) => _$InputFromJson(json);
 
@@ -180,8 +188,14 @@ class Input extends JsonSerializable with EquatableMixin {
       toJson: fromDartMyUuidToGraphQLMyUuid)
   late MyUuid id;
 
+  @JsonKey(
+      fromJson: fromGraphQLMyUuidNullableToDartMyUuidNullable,
+      toJson: fromDartMyUuidNullableToGraphQLMyUuidNullable)
+  MyUuid? idNullabe;
+
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, idNullabe];
+  @override
   Map<String, dynamic> toJson() => _$InputToJson(this);
 }
 
@@ -196,13 +210,15 @@ class CustomArguments extends JsonSerializable with EquatableMixin {
   late Input input;
 
   @JsonKey(
-      fromJson: fromGraphQLMyUuidToDartMyUuid,
-      toJson: fromDartMyUuidToGraphQLMyUuid)
+      fromJson: fromGraphQLMyUuidNullableToDartMyUuidNullable,
+      toJson: fromDartMyUuidNullableToGraphQLMyUuidNullable)
   final MyUuid? previousId;
 
   @JsonKey(
-      fromJson: fromGraphQLListMyUuidToDartListMyUuid,
-      toJson: fromDartListMyUuidToGraphQLListMyUuid)
+      fromJson:
+          fromGraphQLListNullableMyUuidNullableToDartListNullableMyUuidNullable,
+      toJson:
+          fromDartListNullableMyUuidNullableToGraphQLListNullableMyUuidNullable)
   final List<MyUuid?>? listIds;
 
   @override
@@ -211,64 +227,66 @@ class CustomArguments extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$CustomArgumentsToJson(this);
 }
 
+final CUSTOM_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'custom'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'input')),
+            type:
+                NamedTypeNode(name: NameNode(value: 'Input'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'previousId')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'MyUuid'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'listIds')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'MyUuid'), isNonNull: false),
+                isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'mut'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'input'),
+                  value: VariableNode(name: NameNode(value: 'input'))),
+              ArgumentNode(
+                  name: NameNode(value: 'previousId'),
+                  value: VariableNode(name: NameNode(value: 'previousId'))),
+              ArgumentNode(
+                  name: NameNode(value: 'listIds'),
+                  value: VariableNode(name: NameNode(value: 'listIds')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 's'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ]))
+      ]))
+]);
+
 class CustomMutation
     extends GraphQLQuery<Custom$MutationRoot, CustomArguments> {
   CustomMutation({required this.variables});
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.mutation,
-        name: NameNode(value: 'custom'),
-        variableDefinitions: [
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'input')),
-              type: NamedTypeNode(
-                  name: NameNode(value: 'Input'), isNonNull: true),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'previousId')),
-              type: NamedTypeNode(
-                  name: NameNode(value: 'MyUuid'), isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: []),
-          VariableDefinitionNode(
-              variable: VariableNode(name: NameNode(value: 'listIds')),
-              type: ListTypeNode(
-                  type: NamedTypeNode(
-                      name: NameNode(value: 'MyUuid'), isNonNull: false),
-                  isNonNull: false),
-              defaultValue: DefaultValueNode(value: null),
-              directives: [])
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'mut'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                    name: NameNode(value: 'input'),
-                    value: VariableNode(name: NameNode(value: 'input'))),
-                ArgumentNode(
-                    name: NameNode(value: 'previousId'),
-                    value: VariableNode(name: NameNode(value: 'previousId'))),
-                ArgumentNode(
-                    name: NameNode(value: 'listIds'),
-                    value: VariableNode(name: NameNode(value: 'listIds')))
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 's'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = CUSTOM_MUTATION_DOCUMENT;
 
   @override
   final String operationName = 'custom';

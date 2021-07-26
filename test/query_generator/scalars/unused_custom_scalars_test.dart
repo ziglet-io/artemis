@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -49,7 +47,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Query$_SomeObject'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'a'),
                   isResolveType: false)
             ],
@@ -80,6 +78,7 @@ class Query$SomeObject extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [a];
+  @override
   Map<String, dynamic> toJson() => _$Query$SomeObjectToJson(this);
 }
 ''';

@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
@@ -55,15 +53,9 @@ final LibraryDefinition libraryDefinition =
       operationName: r'some_query',
       classes: [
         EnumDefinition(name: EnumName(name: r'MyEnum'), values: [
-          EnumValueDefinition(
-            name: EnumValueName(name: r'A'),
-          ),
-          EnumValueDefinition(
-            name: EnumValueName(name: r'B'),
-          ),
-          EnumValueDefinition(
-            name: EnumValueName(name: r'ARTEMIS_UNKNOWN'),
-          ),
+          EnumValueDefinition(name: EnumValueName(name: r'A')),
+          EnumValueDefinition(name: EnumValueName(name: r'B')),
+          EnumValueDefinition(name: EnumValueName(name: r'ARTEMIS_UNKNOWN'))
         ]),
         ClassDefinition(
             name: ClassName(name: r'SomeQuery$_Response$_SomeObject'),
@@ -83,7 +75,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'SomeQuery$_Response'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'thisIsAString'),
                   isResolveType: false),
               ClassProperty(
@@ -120,6 +112,7 @@ class SomeQuery$Response$SomeObject extends JsonSerializable
 
   @override
   List<Object?> get props => [thisIsAnEnum];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$Response$SomeObjectToJson(this);
 }
 
@@ -136,6 +129,7 @@ class SomeQuery$Response extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [thisIsAString, o];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$ResponseToJson(this);
 }
 

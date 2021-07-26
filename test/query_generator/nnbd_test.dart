@@ -1,9 +1,4 @@
-// @dart = 2.8
-
-import 'package:artemis/builder.dart';
 import 'package:artemis/generator/data/data.dart';
-import 'package:build/build.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -62,11 +57,11 @@ final libraryDefinition =
             name: ClassName(name: r'Query$_Query'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'nonNullAndSelected'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'nullableAndSelected'),
                   isResolveType: false)
             ],
@@ -99,6 +94,7 @@ class Query$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [nonNullAndSelected, nullableAndSelected];
+  @override
   Map<String, dynamic> toJson() => _$Query$QueryToJson(this);
 }
 ''';
@@ -113,46 +109,47 @@ final listsLibraryDefinition =
             name: ClassName(name: r'Query$_Query'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'int'),
+                  type: DartTypeName(name: r'int'),
                   name: ClassPropertyName(name: r'i'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'int', isNonNull: true),
+                  type: DartTypeName(name: r'int', isNonNull: true),
                   name: ClassPropertyName(name: r'inn'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
-                      typeName: TypeName(name: r'int'), isNonNull: false),
+                      typeName: DartTypeName(name: r'int'), isNonNull: false),
                   name: ClassPropertyName(name: r'li'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
-                      typeName: TypeName(name: r'int', isNonNull: true),
+                      typeName: DartTypeName(name: r'int', isNonNull: true),
                       isNonNull: false),
                   name: ClassPropertyName(name: r'linn'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
-                      typeName: TypeName(name: r'int'), isNonNull: true),
+                      typeName: DartTypeName(name: r'int'), isNonNull: true),
                   name: ClassPropertyName(name: r'lnni'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
-                      typeName: TypeName(name: r'int', isNonNull: true),
+                      typeName: DartTypeName(name: r'int', isNonNull: true),
                       isNonNull: true),
                   name: ClassPropertyName(name: r'lnninn'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
                       typeName: ListOfTypeName(
-                          typeName: TypeName(name: r'int'), isNonNull: false),
+                          typeName: DartTypeName(name: r'int'),
+                          isNonNull: false),
                       isNonNull: false),
                   name: ClassPropertyName(name: r'matrix'),
                   isResolveType: false),
               ClassProperty(
                   type: ListOfTypeName(
                       typeName: ListOfTypeName(
-                          typeName: TypeName(name: r'int', isNonNull: true),
+                          typeName: DartTypeName(name: r'int', isNonNull: true),
                           isNonNull: true),
                       isNonNull: true),
                   name: ClassPropertyName(name: r'matrixnn'),
@@ -199,6 +196,7 @@ class Query$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [i, inn, li, linn, lnni, lnninn, matrix, matrixnn];
+  @override
   Map<String, dynamic> toJson() => _$Query$QueryToJson(this);
 }
 ''';

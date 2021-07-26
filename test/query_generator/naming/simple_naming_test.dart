@@ -1,7 +1,4 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
-import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';
@@ -65,7 +62,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'ClientEventItem'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'int', isNonNull: true),
+                  type: DartTypeName(name: r'int', isNonNull: true),
                   name: ClassPropertyName(name: r'type'),
                   isResolveType: false)
             ],
@@ -122,6 +119,7 @@ class ClientEventItem extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [type];
+  @override
   Map<String, dynamic> toJson() => _$ClientEventItemToJson(this);
 }
 
@@ -136,6 +134,7 @@ class ClientEventPage extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [items];
+  @override
   Map<String, dynamic> toJson() => _$ClientEventPageToJson(this);
 }
 
@@ -150,43 +149,46 @@ class ClientEventsData$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [clientEvents];
+  @override
   Map<String, dynamic> toJson() => _$ClientEventsData$QueryToJson(this);
 }
+
+final CLIENT_EVENTS_DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'ClientEventsData'),
+      variableDefinitions: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'clientEvents'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'items'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'type'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ]))
+            ]))
+      ]))
+]);
 
 class ClientEventsDataQuery
     extends GraphQLQuery<ClientEventsData$Query, JsonSerializable> {
   ClientEventsDataQuery();
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'ClientEventsData'),
-        variableDefinitions: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'clientEvents'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                    name: NameNode(value: 'items'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: SelectionSetNode(selections: [
-                      FieldNode(
-                          name: NameNode(value: 'type'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null)
-                    ]))
-              ]))
-        ]))
-  ]);
+  final DocumentNode document = CLIENT_EVENTS_DATA_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'ClientEventsData';

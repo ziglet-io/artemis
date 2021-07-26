@@ -1,10 +1,4 @@
-// @dart = 2.8
-
-import 'package:artemis/builder.dart';
-import 'package:artemis/generator/data/enum_value_definition.dart';
 import 'package:artemis/generator/data/data.dart';
-import 'package:build/build.dart';
-import 'package:build_test/build_test.dart';
 import 'package:test/test.dart';
 
 import '../helpers.dart';
@@ -46,7 +40,7 @@ void main() {
                         name: ClassName(name: r'Custom$_QueryRoot$_q'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r'e'),
                               isResolveType: false),
                           ClassProperty(
@@ -100,6 +94,7 @@ class Custom$QueryRoot$Q extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [e, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$QToJson(this);
 }
 
@@ -117,6 +112,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRootToJson(this);
 }
 ''',
@@ -159,7 +155,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
                         name: ClassName(name: r'Custom$_QueryRoot$_q'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r'e'),
                               isResolveType: false),
                           ClassProperty(
@@ -213,6 +209,7 @@ class Custom$QueryRoot$Q extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [e, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$QToJson(this);
 }
 
@@ -230,6 +227,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRootToJson(this);
 }
 ''',
@@ -303,7 +301,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
                         name: FragmentName(name: r'QueryResponseMixin'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'String'),
+                              type: DartTypeName(name: r'String'),
                               name: ClassPropertyName(name: r'e'),
                               isResolveType: false),
                           ClassProperty(
@@ -342,7 +340,8 @@ class Custom$QueryRoot$Q extends JsonSerializable
   String? $$typename;
 
   @override
-  List<Object?> get props => [e, $$typename, $$typename];
+  List<Object?> get props => [e, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$QToJson(this);
 }
 
@@ -360,6 +359,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRootToJson(this);
 }
 ''',
@@ -411,7 +411,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
                         name: ClassName(name: r'Custom$_QueryRoot$_q$_typeA'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'int'),
+                              type: DartTypeName(name: r'int'),
                               name: ClassPropertyName(name: r'a'),
                               isResolveType: false),
                           ClassProperty(
@@ -428,7 +428,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
                         name: ClassName(name: r'Custom$_QueryRoot$_q$_typeB'),
                         properties: [
                           ClassProperty(
-                              type: TypeName(name: r'int'),
+                              type: DartTypeName(name: r'int'),
                               name: ClassPropertyName(name: r'b'),
                               isResolveType: false),
                           ClassProperty(
@@ -501,6 +501,7 @@ class Custom$QueryRoot$Q$TypeA extends Custom$QueryRoot$Q with EquatableMixin {
 
   @override
   List<Object?> get props => [a, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$Q$TypeAToJson(this);
 }
 
@@ -519,6 +520,7 @@ class Custom$QueryRoot$Q$TypeB extends Custom$QueryRoot$Q with EquatableMixin {
 
   @override
   List<Object?> get props => [b, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$Q$TypeBToJson(this);
 }
 
@@ -542,6 +544,7 @@ class Custom$QueryRoot$Q extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [$$typename];
+  @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
       case r'TypeA':
@@ -568,6 +571,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRootToJson(this);
 }
 ''',
@@ -637,7 +641,7 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
                     name: FragmentName(name: r'QueryResponseMixin'),
                     properties: [
                       ClassProperty(
-                          type: TypeName(name: r'String'),
+                          type: DartTypeName(name: r'String'),
                           name: ClassPropertyName(name: r'e'),
                           isResolveType: false),
                       ClassProperty(
@@ -677,7 +681,8 @@ class Custom$QueryRoot$QueryResponse extends JsonSerializable
   String? $$typename;
 
   @override
-  List<Object?> get props => [e, $$typename, $$typename];
+  List<Object?> get props => [e, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRoot$QueryResponseToJson(this);
 }
 
@@ -695,63 +700,66 @@ class Custom$QueryRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [q, $$typename];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryRootToJson(this);
 }
+
+final CUSTOM_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'custom'),
+      variableDefinitions: [],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'q'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                  name: NameNode(value: 'QueryResponse'), directives: []),
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ])),
+        FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null)
+      ])),
+  FragmentDefinitionNode(
+      name: NameNode(value: 'QueryResponse'),
+      typeCondition: TypeConditionNode(
+          on: NamedTypeNode(
+              name: NameNode(value: 'QueryResponse'), isNonNull: false)),
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'e'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null),
+        FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null)
+      ]))
+]);
 
 class CustomQuery extends GraphQLQuery<Custom$QueryRoot, JsonSerializable> {
   CustomQuery();
 
   @override
-  final DocumentNode document = DocumentNode(definitions: [
-    OperationDefinitionNode(
-        type: OperationType.query,
-        name: NameNode(value: 'custom'),
-        variableDefinitions: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'q'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FragmentSpreadNode(
-                    name: NameNode(value: 'QueryResponse'), directives: []),
-                FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null)
-              ])),
-          FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null)
-        ])),
-    FragmentDefinitionNode(
-        name: NameNode(value: 'QueryResponse'),
-        typeCondition: TypeConditionNode(
-            on: NamedTypeNode(
-                name: NameNode(value: 'QueryResponse'), isNonNull: false)),
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-              name: NameNode(value: 'e'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null),
-          FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null)
-        ]))
-  ]);
+  final DocumentNode document = CUSTOM_QUERY_DOCUMENT;
 
   @override
   final String operationName = 'custom';

@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -68,11 +66,11 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'MyFragmentMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r's'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'int'),
+                  type: DartTypeName(name: r'int'),
                   name: ClassPropertyName(name: r'i'),
                   isResolveType: false)
             ]),
@@ -141,6 +139,7 @@ class SomeObject extends JsonSerializable with EquatableMixin, MyFragmentMixin {
 
   @override
   List<Object?> get props => [s, i];
+  @override
   Map<String, dynamic> toJson() => _$SomeObjectToJson(this);
 }
 
@@ -155,6 +154,7 @@ class MoreData extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [someObject];
+  @override
   Map<String, dynamic> toJson() => _$MoreDataToJson(this);
 }
 
@@ -171,6 +171,7 @@ class SomeQuery$QueryResponse extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [someObject, moreData];
+  @override
   Map<String, dynamic> toJson() => _$SomeQuery$QueryResponseToJson(this);
 }
 ''';

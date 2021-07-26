@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -78,7 +76,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Query$_Node$_User'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'username'),
                   isResolveType: false)
             ],
@@ -90,7 +88,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Query$_Node$_ChatMessage'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'message'),
                   isResolveType: false)
             ],
@@ -102,7 +100,7 @@ final LibraryDefinition libraryDefinition =
             name: ClassName(name: r'Custom$_Query$_Node'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
@@ -132,7 +130,7 @@ final LibraryDefinition libraryDefinition =
       ],
       inputs: [
         QueryInput(
-            type: TypeName(name: r'String', isNonNull: true),
+            type: DartTypeName(name: r'String', isNonNull: true),
             name: QueryInputName(name: r'id'))
       ],
       generateHelpers: false,
@@ -158,6 +156,7 @@ class Custom$Query$Node$User extends Custom$Query$Node with EquatableMixin {
 
   @override
   List<Object?> get props => [username];
+  @override
   Map<String, dynamic> toJson() => _$Custom$Query$Node$UserToJson(this);
 }
 
@@ -173,6 +172,7 @@ class Custom$Query$Node$ChatMessage extends Custom$Query$Node
 
   @override
   List<Object?> get props => [message];
+  @override
   Map<String, dynamic> toJson() => _$Custom$Query$Node$ChatMessageToJson(this);
 }
 
@@ -198,6 +198,7 @@ class Custom$Query$Node extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [id, $$typename];
+  @override
   Map<String, dynamic> toJson() {
     switch ($$typename) {
       case r'User':
@@ -221,6 +222,7 @@ class Custom$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [nodeById];
+  @override
   Map<String, dynamic> toJson() => _$Custom$QueryToJson(this);
 }
 ''';

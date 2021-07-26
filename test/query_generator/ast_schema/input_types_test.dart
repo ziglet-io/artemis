@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -68,11 +66,11 @@ final LibraryDefinition libraryDefinition =
                 name: r'CreateThing$_MutationRoot$_CreateThingResponse$_Thing'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'message'),
                   isResolveType: false)
             ],
@@ -106,25 +104,14 @@ final LibraryDefinition libraryDefinition =
             typeNameField: ClassPropertyName(name: r'__typename'),
             isInput: false),
         ClassDefinition(
-            name: ClassName(name: r'OtherObjectInput'),
-            properties: [
-              ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
-                  name: ClassPropertyName(name: r'id'),
-                  isResolveType: false)
-            ],
-            factoryPossibilities: {},
-            typeNameField: ClassPropertyName(name: r'__typename'),
-            isInput: true),
-        ClassDefinition(
             name: ClassName(name: r'CreateThingInput'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'clientId'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'message'),
                   isResolveType: false),
               ClassProperty(
@@ -133,6 +120,17 @@ final LibraryDefinition libraryDefinition =
                           TypeName(name: r'OtherObjectInput', isNonNull: true),
                       isNonNull: false),
                   name: ClassPropertyName(name: r'shares'),
+                  isResolveType: false)
+            ],
+            factoryPossibilities: {},
+            typeNameField: ClassPropertyName(name: r'__typename'),
+            isInput: true),
+        ClassDefinition(
+            name: ClassName(name: r'OtherObjectInput'),
+            properties: [
+              ClassProperty(
+                  type: DartTypeName(name: r'String', isNonNull: true),
+                  name: ClassPropertyName(name: r'id'),
                   isResolveType: false)
             ],
             factoryPossibilities: {},
@@ -171,6 +169,7 @@ class CreateThing$MutationRoot$CreateThingResponse$Thing
 
   @override
   List<Object?> get props => [id, message];
+  @override
   Map<String, dynamic> toJson() =>
       _$CreateThing$MutationRoot$CreateThingResponse$ThingToJson(this);
 }
@@ -188,6 +187,7 @@ class CreateThing$MutationRoot$CreateThingResponse extends JsonSerializable
 
   @override
   List<Object?> get props => [thing];
+  @override
   Map<String, dynamic> toJson() =>
       _$CreateThing$MutationRoot$CreateThingResponseToJson(this);
 }
@@ -203,21 +203,8 @@ class CreateThing$MutationRoot extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [createThing];
-  Map<String, dynamic> toJson() => _$CreateThing$MutationRootToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class OtherObjectInput extends JsonSerializable with EquatableMixin {
-  OtherObjectInput({required this.id});
-
-  factory OtherObjectInput.fromJson(Map<String, dynamic> json) =>
-      _$OtherObjectInputFromJson(json);
-
-  late String id;
-
   @override
-  List<Object?> get props => [id];
-  Map<String, dynamic> toJson() => _$OtherObjectInputToJson(this);
+  Map<String, dynamic> toJson() => _$CreateThing$MutationRootToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -235,6 +222,22 @@ class CreateThingInput extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [clientId, message, shares];
+  @override
   Map<String, dynamic> toJson() => _$CreateThingInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OtherObjectInput extends JsonSerializable with EquatableMixin {
+  OtherObjectInput({required this.id});
+
+  factory OtherObjectInput.fromJson(Map<String, dynamic> json) =>
+      _$OtherObjectInputFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$OtherObjectInputToJson(this);
 }
 ''';

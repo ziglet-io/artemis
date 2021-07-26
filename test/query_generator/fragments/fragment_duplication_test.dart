@@ -1,5 +1,3 @@
-// @dart = 2.8
-
 import 'package:artemis/generator/data/data.dart';
 import 'package:test/test.dart';
 
@@ -112,7 +110,7 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
@@ -124,7 +122,7 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonNameMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'name'),
                   isResolveType: false)
             ]),
@@ -132,11 +130,11 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonPartsMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'number'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'name'),
                   isResolveType: false)
             ])
@@ -180,7 +178,7 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String', isNonNull: true),
+                  type: DartTypeName(name: r'String', isNonNull: true),
                   name: ClassPropertyName(name: r'id'),
                   isResolveType: false),
               ClassProperty(
@@ -192,7 +190,7 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonNameMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'name'),
                   isResolveType: false)
             ]),
@@ -200,11 +198,11 @@ final LibraryDefinition libraryDefinition =
             name: FragmentName(name: r'PokemonPartsMixin'),
             properties: [
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'number'),
                   isResolveType: false),
               ClassProperty(
-                  type: TypeName(name: r'String'),
+                  type: DartTypeName(name: r'String'),
                   name: ClassPropertyName(name: r'name'),
                   isResolveType: false)
             ])
@@ -243,6 +241,7 @@ class PokemonData$Query$Pokemon extends JsonSerializable
 
   @override
   List<Object?> get props => [id, evolution, number, name];
+  @override
   Map<String, dynamic> toJson() => _$PokemonData$Query$PokemonToJson(this);
 }
 
@@ -257,6 +256,7 @@ class PokemonData$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [pokemon];
+  @override
   Map<String, dynamic> toJson() => _$PokemonData$QueryToJson(this);
 }
 
@@ -270,6 +270,7 @@ class PokemonMixin$Evolution extends JsonSerializable
 
   @override
   List<Object?> get props => [name];
+  @override
   Map<String, dynamic> toJson() => _$PokemonMixin$EvolutionToJson(this);
 }
 
@@ -284,6 +285,7 @@ class AllPokemonsData$Query$AllPokemons extends JsonSerializable
 
   @override
   List<Object?> get props => [id, evolution, number, name];
+  @override
   Map<String, dynamic> toJson() =>
       _$AllPokemonsData$Query$AllPokemonsToJson(this);
 }
@@ -299,6 +301,7 @@ class AllPokemonsData$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [allPokemons];
+  @override
   Map<String, dynamic> toJson() => _$AllPokemonsData$QueryToJson(this);
 }
 ''';
